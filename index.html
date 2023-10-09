@@ -9,14 +9,11 @@
     <h1>World Editor</h1>
     <canvas id="myCanvas"></canvas>
     <div id="controls">
-      <button onclick="addRandomPoint()">Add Point</button>
-      <button onclick="addRandomSegment()">Add Segment</button>
-      <button onclick="removeRandomSegment()">Remove Segment</button>
-      <button onclick="removeRandomPoint()">Remove Point</button>
-      <button onclick="removeAll()">Remove All</button>
     </div>
 
+    <script src="js/graphEditor.js"></script>
     <script src="js/math/graph.js"></script>
+    <script src="js/math/utils.js"></script>
     <script src="js/primitives/point.js"></script>
     <script src="js/primitives/segment.js"></script>
     <script>
@@ -88,7 +85,15 @@
         [p1, p2, p3, p4],
         [s1, s2, s3, s4]
       );
-      graph.draw(ctx);
+      const graphEditor = new GraphEditor(myCanvas, graph);
+
+      animate();
+
+      function animate() {
+        ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        graphEditor.display();
+        requestAnimationFrame(animate);
+      }
     </script>
   </bpdy>
 </html>
